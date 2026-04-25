@@ -107,6 +107,10 @@ class AudioEngine {
         engine.stop()
     }
 
+    func setAttenuation(_ value: Float) {
+        ncProcessor?.setAttenuation(value)
+    }
+
     private func processBuffer(_ buffer: AVAudioPCMBuffer) {
         guard let channelData = buffer.floatChannelData else { return }
 

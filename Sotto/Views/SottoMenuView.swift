@@ -61,6 +61,20 @@ struct SottoMenuView: View {
             Toggle("Noise Cancellation", isOn: $audioManager.isEnabled)
                 .toggleStyle(.switch)
 
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Strength")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                    Text("\(Int(audioManager.attenuation * 100))%")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .monospacedDigit()
+                }
+                Slider(value: $audioManager.attenuation, in: 0...1)
+            }
+
             DevicePickerView()
                 .environmentObject(audioManager)
         }

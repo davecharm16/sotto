@@ -24,6 +24,12 @@ class AudioManager: ObservableObject {
         }
     }
     @Published var isBlackHoleInstalled: Bool = false
+    @Published var attenuation: Float = 1.0 {
+        didSet {
+            audioEngine?.setAttenuation(attenuation)
+            UserDefaults.standard.set(attenuation, forKey: "attenuation")
+        }
+    }
 
     private var audioEngine: AudioEngine?
     private var deviceMonitor: DeviceMonitor?
@@ -33,6 +39,7 @@ class AudioManager: ObservableObject {
         setupDeviceMonitor()
         refreshDevices()
         restoreSelectedDevice()
+        restoreAttenuation()
         checkBlackHoleStatus()
     }
 
@@ -115,6 +122,13 @@ class AudioManager: ObservableObject {
     private func restoreSelectedDevice() {
         guard let savedUID = UserDefaults.standard.string(forKey: "selectedDeviceUID") else { return }
         selectedDevice = inputDevices.first { $0.uid == savedUID }
+    }
+
+    private func restoreAttenuation() {
+        let saved = UserDefaults.standard.float(forKey: "attenuation")
+        if saved > 0 {
+            attenuation = saved
+        }
     }
 
     func shutdown() {

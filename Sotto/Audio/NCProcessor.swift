@@ -15,6 +15,11 @@ class NCProcessor {
         df_process(handle, buffer, Int32(frameCount))
     }
 
+    func setAttenuation(_ value: Float) {
+        guard let handle = handle else { return }
+        df_set_attenuation(handle, value)
+    }
+
     deinit {
         if let handle = handle {
             df_destroy(handle)
