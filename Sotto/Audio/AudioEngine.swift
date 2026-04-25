@@ -19,9 +19,20 @@ class AudioEngine {
         interleaved: false
     )!
 
+    private let frameSize = 480
+    private let inputRingBuffer: RingBuffer
+    private let outputRingBuffer: RingBuffer
+    private var processingThread: Thread?
+    private var isRunning = false
+    private let processingLock = NSCondition()
+
     init(inputDevice: AudioDevice, outputDevice: AudioDevice) throws {
         self.inputDevice = inputDevice
         self.outputDevice = outputDevice
+
+        // Ring buffers: ~100ms capacity (4800 samples at 48kHz)
+        self.inputRingBuffer = RingBuffer(capacity: 4800)
+        self.outputRingBuffer = RingBuffer(capacity: 4800)
 
         if let configPath = Bundle.main.path(forResource: "config", ofType: "ini", inDirectory: "DeepFilterNet3") {
             let modelDir = (configPath as NSString).deletingLastPathComponent
@@ -90,11 +101,17 @@ class AudioEngine {
     }
 
     func start() throws {
+        isRunning = true
+        inputRingBuffer.reset()
+        outputRingBuffer.reset()
+
+        startProcessingThread()
+
         let inputNode = engine.inputNode
         let inputFormat = inputNode.outputFormat(forBus: 0)
 
         inputNode.installTap(onBus: 0, bufferSize: 480, format: inputFormat) { [weak self] buffer, time in
-            self?.processBuffer(buffer)
+            self?.handleAudioBuffer(buffer)
         }
 
         try engine.start()
@@ -102,16 +119,63 @@ class AudioEngine {
     }
 
     func stop() {
+        isRunning = false
+
+        processingLock.lock()
+        processingLock.signal()
+        processingLock.unlock()
+
+        processingThread = nil
+
         playerNode.stop()
         engine.inputNode.removeTap(onBus: 0)
         engine.stop()
+
+        ncProcessor?.shutdown()
     }
 
     func setAttenuation(_ value: Float) {
         ncProcessor?.setAttenuation(value)
     }
 
-    private func processBuffer(_ buffer: AVAudioPCMBuffer) {
+    private func startProcessingThread() {
+        processingThread = Thread { [weak self] in
+            self?.processingLoop()
+        }
+        processingThread?.name = "SottoNCProcessing"
+        processingThread?.qualityOfService = .userInteractive
+        processingThread?.start()
+    }
+
+    private func processingLoop() {
+        var processBuffer = [Float](repeating: 0, count: frameSize)
+
+        while isRunning {
+            processingLock.lock()
+
+            while isRunning && inputRingBuffer.availableToRead < frameSize {
+                processingLock.wait()
+            }
+
+            guard isRunning else {
+                processingLock.unlock()
+                break
+            }
+
+            processingLock.unlock()
+
+            processBuffer.withUnsafeMutableBufferPointer { ptr in
+                guard let base = ptr.baseAddress else { return }
+
+                if inputRingBuffer.read(base, count: frameSize) {
+                    ncProcessor?.process(buffer: base, frameCount: frameSize)
+                    _ = outputRingBuffer.write(base, count: frameSize)
+                }
+            }
+        }
+    }
+
+    private func handleAudioBuffer(_ buffer: AVAudioPCMBuffer) {
         guard let channelData = buffer.floatChannelData else { return }
 
         let frameCount = Int(buffer.frameLength)
@@ -120,6 +184,14 @@ class AudioEngine {
         let level = calculateRMSLevel(inputData, frameCount: frameCount)
         onLevelUpdate?(level)
 
+        // Write to input ring buffer for processing thread
+        if inputRingBuffer.write(inputData, count: frameCount) {
+            processingLock.lock()
+            processingLock.signal()
+            processingLock.unlock()
+        }
+
+        // Read processed audio from output ring buffer
         guard let outputBuffer = AVAudioPCMBuffer(pcmFormat: processingFormat, frameCapacity: AVAudioFrameCount(frameCount)) else {
             return
         }
@@ -127,11 +199,13 @@ class AudioEngine {
 
         guard let outputData = outputBuffer.floatChannelData?[0] else { return }
 
-        memcpy(outputData, inputData, frameCount * MemoryLayout<Float>.size)
-
-        ncProcessor?.process(buffer: outputData, frameCount: frameCount)
-
-        playerNode.scheduleBuffer(outputBuffer, completionHandler: nil)
+        if outputRingBuffer.read(outputData, count: frameCount) {
+            playerNode.scheduleBuffer(outputBuffer, completionHandler: nil)
+        } else {
+            // Not enough processed audio yet, output silence or passthrough
+            memcpy(outputData, inputData, frameCount * MemoryLayout<Float>.size)
+            playerNode.scheduleBuffer(outputBuffer, completionHandler: nil)
+        }
     }
 
     private func calculateRMSLevel(_ data: UnsafeMutablePointer<Float>, frameCount: Int) -> Float {

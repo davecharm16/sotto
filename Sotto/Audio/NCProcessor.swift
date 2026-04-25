@@ -1,7 +1,9 @@
 import Foundation
 
-class NCProcessor {
+final class NCProcessor {
     private var handle: OpaquePointer?
+    private let lock = NSLock()
+    private var isDestroyed = false
 
     init(modelPath: String) throws {
         handle = df_create(modelPath)
@@ -11,19 +13,33 @@ class NCProcessor {
     }
 
     func process(buffer: UnsafeMutablePointer<Float>, frameCount: Int) {
-        guard let handle = handle else { return }
+        lock.lock()
+        defer { lock.unlock() }
+
+        guard !isDestroyed, let handle = handle else { return }
         df_process(handle, buffer, Int32(frameCount))
     }
 
     func setAttenuation(_ value: Float) {
-        guard let handle = handle else { return }
+        lock.lock()
+        defer { lock.unlock() }
+
+        guard !isDestroyed, let handle = handle else { return }
         df_set_attenuation(handle, value)
     }
 
+    func shutdown() {
+        lock.lock()
+        defer { lock.unlock() }
+
+        guard !isDestroyed, let handle = handle else { return }
+        isDestroyed = true
+        df_destroy(handle)
+        self.handle = nil
+    }
+
     deinit {
-        if let handle = handle {
-            df_destroy(handle)
-        }
+        shutdown()
     }
 }
 
