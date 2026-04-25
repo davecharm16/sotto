@@ -1,0 +1,76 @@
+name: Sotto
+options:
+  bundleIdPrefix: com.sotto
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "15.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_HARDENED_RUNTIME: YES
+
+targets:
+  Sotto:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sotto
+        excludes:
+          - "**/*.h"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sotto.app
+        INFOPLIST_FILE: Sotto/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Sotto/Sotto.entitlements
+        SWIFT_OBJC_BRIDGING_HEADER: Sotto/DeepFilter-Bridging-Header.h
+        LD_RUNPATH_SEARCH_PATHS: "@executable_path/../Frameworks"
+        LIBRARY_SEARCH_PATHS:
+          - "$(PROJECT_DIR)/DeepFilter/target/release"
+        OTHER_LDFLAGS:
+          - "-ldeepfilter"
+          - "-framework CoreAudio"
+          - "-framework AVFoundation"
+          - "-framework Accelerate"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies: []
+    preBuildScripts:
+      - name: Build Rust Library
+        script: |
+          cd "${PROJECT_DIR}/DeepFilter"
+          if [ ! -f "target/release/libdeepfilter.a" ]; then
+            cargo build --release
+          fi
+        basedOnDependencyAnalysis: false
+
+  SottoTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests
+    dependencies:
+      - target: Sotto
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.sotto.app.tests
+
+schemes:
+  Sotto:
+    build:
+      targets:
+        Sotto: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - SottoTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

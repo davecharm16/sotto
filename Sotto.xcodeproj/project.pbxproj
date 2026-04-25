@@ -1,0 +1,529 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */; };
+		3BAE91EE86F7C0C917BDB92C /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88C591F90C5A5E884FB75 /* AudioDevice.swift */; };
+		3ECF7F4297FCDF7D4D6D0142 /* SottoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */; };
+		45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */; };
+		4B19D303D244BABED03983DF /* AudioLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */; };
+		814A321F8CABF94168522D57 /* SottoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */; };
+		8515394BB3F9504FC74BB4A9 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63B057343FB5A6F3463D2D /* AudioEngine.swift */; };
+		CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */; };
+		D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17641C3B03728027208486E5 /* AudioManager.swift */; };
+		E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E03AE1021C1145073976824 /* SottoMenuView.swift */; };
+		ED5133ADF55100C629D8099F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53ACB44A361763F4C050754 /* Assets.xcassets */; };
+		F75B925CAB9C346C9CCA246D /* DevicePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4632ACC153A13ABA01A5D170 /* DevicePickerView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DD0D75D4903BDE2E223C613 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF0403DC43BBAC7D8CC953E4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FED82104CD54FDCBF3A1311B;
+			remoteInfo = Sotto;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		17641C3B03728027208486E5 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
+		2A94A254F9B50269EE1EAB8A /* Sotto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sotto.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		35AE106A0C8D9B91FD6D29AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3A63B057343FB5A6F3463D2D /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
+		3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoTests.swift; sourceTree = "<group>"; };
+		4632ACC153A13ABA01A5D170 /* DevicePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePickerView.swift; sourceTree = "<group>"; };
+		48E88C591F90C5A5E884FB75 /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
+		4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLevelView.swift; sourceTree = "<group>"; };
+		78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCProcessor.swift; sourceTree = "<group>"; };
+		7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMonitor.swift; sourceTree = "<group>"; };
+		7E03AE1021C1145073976824 /* SottoMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoMenuView.swift; sourceTree = "<group>"; };
+		AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SottoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C53ACB44A361763F4C050754 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB353666F0C36BD193807424 /* Sotto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sotto.entitlements; sourceTree = "<group>"; };
+		E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		03EE21664FE912C42CCE7A3C /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		07C7A75DD616D67B55F582A9 = {
+			isa = PBXGroup;
+			children = (
+				F7A77228DAEC010D8D9B62AC /* Sotto */,
+				03EE21664FE912C42CCE7A3C /* Tests */,
+				AE528EBD8D688E7864DA0F83 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1336C58EC0731B637B3D86D0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		3942EF9B29E273E8176B0E01 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				48E88C591F90C5A5E884FB75 /* AudioDevice.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		413C12162FB10320CE1B8C2B /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				3A63B057343FB5A6F3463D2D /* AudioEngine.swift */,
+				17641C3B03728027208486E5 /* AudioManager.swift */,
+				7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */,
+				78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		8792D782C3909FDBD63BE832 /* DeepFilterNet3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DeepFilterNet3;
+			sourceTree = "<group>";
+		};
+		8F1DC9F74E195FE611C2BBF1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */,
+				4632ACC153A13ABA01A5D170 /* DevicePickerView.swift */,
+				050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */,
+				7E03AE1021C1145073976824 /* SottoMenuView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AE528EBD8D688E7864DA0F83 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2A94A254F9B50269EE1EAB8A /* Sotto.app */,
+				AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E17BCD3CF449B23843150CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8792D782C3909FDBD63BE832 /* DeepFilterNet3 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F7A77228DAEC010D8D9B62AC /* Sotto */ = {
+			isa = PBXGroup;
+			children = (
+				C53ACB44A361763F4C050754 /* Assets.xcassets */,
+				35AE106A0C8D9B91FD6D29AB /* Info.plist */,
+				CB353666F0C36BD193807424 /* Sotto.entitlements */,
+				E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */,
+				413C12162FB10320CE1B8C2B /* Audio */,
+				3942EF9B29E273E8176B0E01 /* Models */,
+				E17BCD3CF449B23843150CEA /* Resources */,
+				1336C58EC0731B637B3D86D0 /* Utilities */,
+				8F1DC9F74E195FE611C2BBF1 /* Views */,
+			);
+			path = Sotto;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BD7C3AF9616605CCB1F1C0C7 /* SottoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66BB9463C1E4C319D70BD280 /* Build configuration list for PBXNativeTarget "SottoTests" */;
+			buildPhases = (
+				03AE429018754CD1E98509E2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5CF593A1E45586B1CAE6E9ED /* PBXTargetDependency */,
+			);
+			name = SottoTests;
+			packageProductDependencies = (
+			);
+			productName = SottoTests;
+			productReference = AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FED82104CD54FDCBF3A1311B /* Sotto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7A5FAC15D95637CC64B7AC7 /* Build configuration list for PBXNativeTarget "Sotto" */;
+			buildPhases = (
+				FE749F3640E2176921D81A11 /* Build Rust Library */,
+				E2CE2FCFF860DF79A110C8C3 /* Sources */,
+				F9C6EB0CAA91E767D24537E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sotto;
+			packageProductDependencies = (
+			);
+			productName = Sotto;
+			productReference = 2A94A254F9B50269EE1EAB8A /* Sotto.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF0403DC43BBAC7D8CC953E4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					BD7C3AF9616605CCB1F1C0C7 = {
+						ProvisioningStyle = Automatic;
+					};
+					FED82104CD54FDCBF3A1311B = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0712DFF1311348F061AB6BB7 /* Build configuration list for PBXProject "Sotto" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 07C7A75DD616D67B55F582A9;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = AE528EBD8D688E7864DA0F83 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FED82104CD54FDCBF3A1311B /* Sotto */,
+				BD7C3AF9616605CCB1F1C0C7 /* SottoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F9C6EB0CAA91E767D24537E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED5133ADF55100C629D8099F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FE749F3640E2176921D81A11 /* Build Rust Library */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Library";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"${PROJECT_DIR}/DeepFilter\"\nif [ ! -f \"target/release/libdeepfilter.a\" ]; then\n  cargo build --release\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03AE429018754CD1E98509E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3ECF7F4297FCDF7D4D6D0142 /* SottoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2CE2FCFF860DF79A110C8C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3BAE91EE86F7C0C917BDB92C /* AudioDevice.swift in Sources */,
+				8515394BB3F9504FC74BB4A9 /* AudioEngine.swift in Sources */,
+				4B19D303D244BABED03983DF /* AudioLevelView.swift in Sources */,
+				D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */,
+				3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */,
+				F75B925CAB9C346C9CCA246D /* DevicePickerView.swift in Sources */,
+				CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */,
+				45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */,
+				814A321F8CABF94168522D57 /* SottoApp.swift in Sources */,
+				E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5CF593A1E45586B1CAE6E9ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FED82104CD54FDCBF3A1311B /* Sotto */;
+			targetProxy = 6DD0D75D4903BDE2E223C613 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1484EF6CB1FA9F082FBB6337 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sotto/Sotto.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sotto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/DeepFilter/target/release",
+				);
+				OTHER_LDFLAGS = (
+					"-ldeepfilter",
+					"-framework CoreAudio",
+					"-framework AVFoundation",
+					"-framework Accelerate",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sotto/DeepFilter-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		227ED99C55CC9F42195BB046 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		3C5B716393C8970FB2CB654D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sotto.app/Contents/MacOS/Sotto";
+			};
+			name = Release;
+		};
+		915DFB23B202403E1AD9EA9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		CEEC4C0173D1DEEB550B6B9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Sotto/Sotto.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Sotto/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/DeepFilter/target/release",
+				);
+				OTHER_LDFLAGS = (
+					"-ldeepfilter",
+					"-framework CoreAudio",
+					"-framework AVFoundation",
+					"-framework Accelerate",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sotto/DeepFilter-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		D075EB8B8CFF6935A1B89895 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sotto.app/Contents/MacOS/Sotto";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0712DFF1311348F061AB6BB7 /* Build configuration list for PBXProject "Sotto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				915DFB23B202403E1AD9EA9A /* Debug */,
+				227ED99C55CC9F42195BB046 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		66BB9463C1E4C319D70BD280 /* Build configuration list for PBXNativeTarget "SottoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D075EB8B8CFF6935A1B89895 /* Debug */,
+				3C5B716393C8970FB2CB654D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B7A5FAC15D95637CC64B7AC7 /* Build configuration list for PBXNativeTarget "Sotto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1484EF6CB1FA9F082FBB6337 /* Debug */,
+				CEEC4C0173D1DEEB550B6B9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF0403DC43BBAC7D8CC953E4 /* Project object */;
+}
