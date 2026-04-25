@@ -22,12 +22,17 @@ struct SottoMenuView: View {
     }
 
     private var header: some View {
-        HStack {
-            Text("Sotto")
-                .font(.headline)
-            Spacer()
-            AudioLevelView(level: audioManager.inputLevel)
-                .frame(width: 60, height: 8)
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text("Sotto")
+                    .font(.headline)
+                Spacer()
+                AudioLevelView(level: audioManager.inputLevel)
+                    .frame(width: 60, height: 8)
+            }
+            Text("Toggle: \u{2318}\u{21E7}N")
+                .font(.caption2)
+                .foregroundColor(.secondary)
         }
     }
 
@@ -58,21 +63,36 @@ struct SottoMenuView: View {
 
     private var mainControls: some View {
         VStack(spacing: 12) {
-            Toggle("Noise Cancellation", isOn: $audioManager.isEnabled)
-                .toggleStyle(.switch)
+            HStack {
+                Toggle("Noise Cancellation", isOn: $audioManager.isEnabled)
+                    .toggleStyle(.switch)
 
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("Strength")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                    Text("\(Int(audioManager.attenuation * 100))%")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .monospacedDigit()
+                if audioManager.isEnabled {
+                    Circle()
+                        .fill(audioManager.isBypassed ? Color.orange : Color.green)
+                        .frame(width: 8, height: 8)
                 }
-                Slider(value: $audioManager.attenuation, in: 0...1)
+            }
+
+            if audioManager.isEnabled {
+                Toggle("Bypass", isOn: $audioManager.isBypassed)
+                    .toggleStyle(.switch)
+                    .font(.caption)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Strength")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                        Text("\(Int(audioManager.attenuation * 100))%")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .monospacedDigit()
+                    }
+                    Slider(value: $audioManager.attenuation, in: 0...1)
+                        .disabled(audioManager.isBypassed)
+                }
             }
 
             DevicePickerView()
@@ -81,22 +101,28 @@ struct SottoMenuView: View {
     }
 
     private var footer: some View {
-        HStack {
-            if let device = audioManager.selectedDevice {
-                Text(device.name)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .lineLimit(1)
-            }
+        VStack(spacing: 8) {
+            Toggle("Launch at Login", isOn: $audioManager.launchAtLogin)
+                .toggleStyle(.switch)
+                .font(.caption)
 
-            Spacer()
+            HStack {
+                if let device = audioManager.selectedDevice {
+                    Text(device.name)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                }
 
-            Button("Quit") {
-                audioManager.shutdown()
-                NSApplication.shared.terminate(nil)
+                Spacer()
+
+                Button("Quit") {
+                    audioManager.shutdown()
+                    NSApplication.shared.terminate(nil)
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(.secondary)
             }
-            .buttonStyle(.plain)
-            .foregroundColor(.secondary)
         }
     }
 }

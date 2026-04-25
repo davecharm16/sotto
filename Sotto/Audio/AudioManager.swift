@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import AVFoundation
+import ServiceManagement
 
 @MainActor
 class AudioManager: ObservableObject {
@@ -26,8 +27,19 @@ class AudioManager: ObservableObject {
     @Published var isBlackHoleInstalled: Bool = false
     @Published var attenuation: Float = 1.0 {
         didSet {
-            audioEngine?.setAttenuation(attenuation)
+            audioEngine?.setAttenuation(isBypassed ? 0 : attenuation)
             UserDefaults.standard.set(attenuation, forKey: "attenuation")
+        }
+    }
+    @Published var isBypassed: Bool = false {
+        didSet {
+            audioEngine?.setAttenuation(isBypassed ? 0 : attenuation)
+        }
+    }
+    @Published var launchAtLogin: Bool = false {
+        didSet {
+            setLaunchAtLogin(launchAtLogin)
+            UserDefaults.standard.set(launchAtLogin, forKey: "launchAtLogin")
         }
     }
 
@@ -40,6 +52,7 @@ class AudioManager: ObservableObject {
         refreshDevices()
         restoreSelectedDevice()
         restoreAttenuation()
+        restoreLaunchAtLogin()
         checkBlackHoleStatus()
     }
 
@@ -128,6 +141,24 @@ class AudioManager: ObservableObject {
         let saved = UserDefaults.standard.float(forKey: "attenuation")
         if saved > 0 {
             attenuation = saved
+        }
+    }
+
+    private func restoreLaunchAtLogin() {
+        launchAtLogin = UserDefaults.standard.bool(forKey: "launchAtLogin")
+    }
+
+    private func setLaunchAtLogin(_ enabled: Bool) {
+        if #available(macOS 13.0, *) {
+            do {
+                if enabled {
+                    try SMAppService.mainApp.register()
+                } else {
+                    try SMAppService.mainApp.unregister()
+                }
+            } catch {
+                print("Failed to set launch at login: \(error)")
+            }
         }
     }
 
