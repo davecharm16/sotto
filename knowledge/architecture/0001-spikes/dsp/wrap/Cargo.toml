@@ -1,0 +1,29 @@
+[package]
+name = "deepfilter-ffi"
+version = "0.2.0"
+edition = "2021"
+
+[lib]
+name = "deepfilter"
+crate-type = ["staticlib", "rlib"]
+
+[dependencies]
+deep_filter = { git = "https://github.com/Rikorose/DeepFilterNet", rev = "d375b2d8309e0935d165700c91da9de862a99c31", default-features = false, features = ["tract", "default-model"] }
+ndarray = "0.15"
+# libDF d375b2d does not compile against tract 0.21.18 (symbol_table API change); pin exactly.
+tract-core = "=0.21.4"
+tract-onnx = "=0.21.4"
+tract-hir = "=0.21.4"
+tract-pulse = "=0.21.4"
+tract-data = "=0.21.4"
+tract-linalg = "=0.21.4"
+tract-nnef = "=0.21.4"
+
+[dev-dependencies]
+hound = "3.5"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

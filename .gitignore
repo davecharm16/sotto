@@ -61,3 +61,6 @@ _bmad/
 # Test artifacts
 *.xcresult
 coverage/
+
+# brownfield adoption scratch (delete after synthesis)
+knowledge/_intake/
