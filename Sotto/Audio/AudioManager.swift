@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import AVFoundation
+import AppKit
 import ServiceManagement
 
 @MainActor
@@ -157,7 +158,10 @@ class AudioManager: ObservableObject {
                     try SMAppService.mainApp.unregister()
                 }
             } catch {
-                print("Failed to set launch at login: \(error)")
+                // SMAppService requires code signing — silently ignore for unsigned builds
+                if launchAtLogin {
+                    launchAtLogin = false
+                }
             }
         }
     }
