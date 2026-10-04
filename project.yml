@@ -21,6 +21,7 @@ targets:
       - path: Sotto
         excludes:
           - "**/*.h"
+          - "**/README.md"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.sotto.app
