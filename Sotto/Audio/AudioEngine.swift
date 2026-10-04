@@ -1,5 +1,6 @@
 import AVFoundation
 import CoreAudio
+import AudioToolbox
 import Accelerate
 
 class AudioEngine {
@@ -47,49 +48,23 @@ class AudioEngine {
     }
 
     private func configureAudioSession() throws {
-        try setInputDevice(inputDevice.id)
-        try setOutputDevice(outputDevice.id)
+        try setDeviceID(inputDevice.id, on: engine.inputNode)
+        try setDeviceID(outputDevice.id, on: engine.outputNode)
     }
 
-    private func setInputDevice(_ deviceID: AudioDeviceID) throws {
+    private func setDeviceID(_ deviceID: AudioDeviceID, on node: AVAudioNode) throws {
         var deviceID = deviceID
-        var propertyAddress = AudioObjectPropertyAddress(
-            mSelector: kAudioHardwarePropertyDefaultInputDevice,
-            mScope: kAudioObjectPropertyScopeGlobal,
-            mElement: kAudioObjectPropertyElementMain
-        )
-
-        let status = AudioObjectSetPropertyData(
-            AudioObjectID(kAudioObjectSystemObject),
-            &propertyAddress,
-            0,
-            nil,
-            UInt32(MemoryLayout<AudioDeviceID>.size),
-            &deviceID
-        )
-
-        if status != noErr {
+        guard let au = (node as? AVAudioIONode)?.audioUnit else {
             throw AudioEngineError.deviceConfigurationFailed
         }
-    }
-
-    private func setOutputDevice(_ deviceID: AudioDeviceID) throws {
-        var deviceID = deviceID
-        var propertyAddress = AudioObjectPropertyAddress(
-            mSelector: kAudioHardwarePropertyDefaultOutputDevice,
-            mScope: kAudioObjectPropertyScopeGlobal,
-            mElement: kAudioObjectPropertyElementMain
-        )
-
-        let status = AudioObjectSetPropertyData(
-            AudioObjectID(kAudioObjectSystemObject),
-            &propertyAddress,
+        let status = AudioUnitSetProperty(
+            au,
+            kAudioOutputUnitProperty_CurrentDevice,
+            kAudioUnitScope_Global,
             0,
-            nil,
-            UInt32(MemoryLayout<AudioDeviceID>.size),
-            &deviceID
+            &deviceID,
+            UInt32(MemoryLayout<AudioDeviceID>.size)
         )
-
         if status != noErr {
             throw AudioEngineError.deviceConfigurationFailed
         }
