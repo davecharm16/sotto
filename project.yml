@@ -66,6 +66,8 @@ targets:
       - path: Sotto/Audio/RingBuffer.swift
       - path: Sotto/Audio/DriftControl.swift
       - path: Sotto/Audio/PipelineCore.swift
+      - path: Sotto/Audio/PipelineController.swift
+      - path: Sotto/Models/AudioDevice.swift
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

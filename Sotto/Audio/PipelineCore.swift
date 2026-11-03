@@ -61,6 +61,7 @@ final class PipelineCore {
     private var thread: Thread?
     private var nc: NCProcessor?
     private var stopped = false
+    private var destroyed = false
 
     // NC-thread state (allocated once in init).
     private let converter: AVAudioConverter?
@@ -147,9 +148,22 @@ final class PipelineCore {
         done.wait()
         nc?.shutdown()       // df_destroy strictly after the df_process thread is gone
         nc = nil
+        lifecycle.lock(); destroyed = true; lifecycle.unlock()
     }
 
     func setAttenuation(_ value: Float) { nc?.setAttenuation(value) }
+
+    /// true once `stop()` has begun (the NC thread may still be joining). Lets teardown order be asserted.
+    /// true only after the NC thread was joined and `df_destroy` ran.
+    var isDestroyed: Bool {
+        lifecycle.lock(); defer { lifecycle.unlock() }
+        return destroyed
+    }
+
+    var isStopped: Bool {
+        lifecycle.lock(); defer { lifecycle.unlock() }
+        return stopped
+    }
 
     var stats: Stats {
         Stats(ringAOverrunFrames: ringA.overrunSamples,

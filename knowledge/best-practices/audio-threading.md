@@ -35,3 +35,17 @@ These are real, but do not copy them into new code.
 ## Principles check
 - **SRP:** capture/output, inference and state each have one owner and one thread.
 - **YAGNI:** a single SPSC pair is enough. Do not add a general-purpose audio scheduler.
+
+## Update 2026-11-03 (Tier B): two engines, controller-owned lifecycle
+The sections above describe the pre-rearchitecture tap design and are superseded by this one.
+- **Capture engine** (`CaptureEngine`): `inputNode` pinned to the mic, then `AVAudioSinkNode`. The block only calls
+  `PipelineCore.push*` (through `Unmanaged._withUnsafeGuaranteedRef`, no retain), `vDSP_rmsqv` and one atomic store.
+- **Render engine** (`RenderEngine`): `AVAudioSourceNode` -> `mainMixerNode` -> `outputNode` pinned to the output
+  device. The block only calls `PipelineCore.pull`. Underrun = silence, counted. Never touch `inputNode` on this engine.
+- Pin the device **before** reading any format. Each engine owns one direction (smell 13 fix). Engines are one-shot.
+- **Teardown order** (`PipelineController`): capture.stop, render.stop, `core.stop()` (joins the NC thread, then
+  `df_destroy`). The blocks hold the core unretained, so the core must outlive both engines' `stop()`.
+- A config-change notification only schedules a debounced rebuild (never rebuilds inside the handler), and only if an
+  engine is unhealthy (stopped, or hardware format differs from the negotiated one).
+- Touching `inputNode` without a mic grant blocks on the TCC prompt (observed in a hosted test), so the controller
+  asks for permission before it configures the capture engine.

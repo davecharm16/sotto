@@ -14,6 +14,10 @@ struct AudioDevice: Identifiable, Hashable {
         uid.contains("BlackHole")
     }
 
+    init(id: AudioDeviceID, uid: String, name: String, isInput: Bool, isOutput: Bool) {
+        self.id = id; self.uid = uid; self.name = name; self.isInput = isInput; self.isOutput = isOutput
+    }
+
     static func getDevices() -> [AudioDevice] {
         var propertyAddress = AudioObjectPropertyAddress(
             mSelector: kAudioHardwarePropertyDevices,

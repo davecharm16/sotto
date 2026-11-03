@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03394AD738C94CAB65EFE756 /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88C591F90C5A5E884FB75 /* AudioDevice.swift */; };
 		081F5D13FB2B76658A274175 /* RingBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B118273D4885E0A5B8C3EF /* RingBufferTests.swift */; };
+		0EC306EB66288350596702AC /* PipelineHardwareSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20246B223BC74E1AD33E509 /* PipelineHardwareSmokeTests.swift */; };
 		0FDED68A18D28B2138D529FA /* enc.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 63684B8783374F046167FD87 /* enc.onnx */; };
 		11455AAC15ED76A64B3EA530 /* erb_dec.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 19587550198656ED5774BFF9 /* erb_dec.onnx */; };
+		118ACBBF4F4EA385DF77304A /* PipelineControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1053E805DD2BC1FC0EE21F /* PipelineControllerTests.swift */; };
 		162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */; };
 		282F117030F4C923CDF3EFB4 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */; };
 		351ACDC1C64AB266CC6D7777 /* GlobalHotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACDB34463DDACC51075634 /* GlobalHotkey.swift */; };
@@ -32,8 +35,10 @@
 		9B94210855DC3EBA00274C41 /* PipelineCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */; };
 		BDF3B3EC1B72F072CF26FEBD /* TestSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */; };
 		C2FD4EBCF11BE40FB3ADDB04 /* DriftControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F325530E3019B0F53D3481C /* DriftControl.swift */; };
+		CACF13ECF9658776C1207772 /* PipelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAB9B07FE2EC47F26A4EBF /* PipelineController.swift */; };
 		CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */; };
 		D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17641C3B03728027208486E5 /* AudioManager.swift */; };
+		E27113F3A5C9A56B0A88EDE6 /* PipelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BAB9B07FE2EC47F26A4EBF /* PipelineController.swift */; };
 		E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E03AE1021C1145073976824 /* SottoMenuView.swift */; };
 		ED5133ADF55100C629D8099F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C53ACB44A361763F4C050754 /* Assets.xcassets */; };
 		F75B925CAB9C346C9CCA246D /* DevicePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4632ACC153A13ABA01A5D170 /* DevicePickerView.swift */; };
@@ -64,6 +69,7 @@
 		48E88C591F90C5A5E884FB75 /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
 		4BC96F56B7119C9C705911EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLevelView.swift; sourceTree = "<group>"; };
+		58BAB9B07FE2EC47F26A4EBF /* PipelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineController.swift; sourceTree = "<group>"; };
 		5D7E813E0164D2C6C62956A7 /* SottoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoTests.swift; sourceTree = "<group>"; };
 		5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSignals.swift; sourceTree = "<group>"; };
 		63684B8783374F046167FD87 /* enc.onnx */ = {isa = PBXFileReference; path = enc.onnx; sourceTree = "<group>"; };
@@ -71,6 +77,7 @@
 		78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCProcessor.swift; sourceTree = "<group>"; };
 		7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMonitor.swift; sourceTree = "<group>"; };
 		7CE6D1212721F5D6C9CD8ACD /* config.ini */ = {isa = PBXFileReference; path = config.ini; sourceTree = "<group>"; };
+		7D1053E805DD2BC1FC0EE21F /* PipelineControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineControllerTests.swift; sourceTree = "<group>"; };
 		7E03AE1021C1145073976824 /* SottoMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoMenuView.swift; sourceTree = "<group>"; };
 		93ACDB34463DDACC51075634 /* GlobalHotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkey.swift; sourceTree = "<group>"; };
 		AE54D17937FA4756A18641B5 /* PipelineCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineCore.swift; sourceTree = "<group>"; };
@@ -81,6 +88,7 @@
 		CB353666F0C36BD193807424 /* Sotto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sotto.entitlements; sourceTree = "<group>"; };
 		E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineCoreTests.swift; sourceTree = "<group>"; };
 		E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoApp.swift; sourceTree = "<group>"; };
+		F20246B223BC74E1AD33E509 /* PipelineHardwareSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineHardwareSmokeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -99,6 +107,7 @@
 			children = (
 				1B576A77C2CD44635770A543 /* DriftControlTests.swift */,
 				4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */,
+				7D1053E805DD2BC1FC0EE21F /* PipelineControllerTests.swift */,
 				E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */,
 				C9B118273D4885E0A5B8C3EF /* RingBufferTests.swift */,
 				5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */,
@@ -123,6 +132,7 @@
 				7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */,
 				0F325530E3019B0F53D3481C /* DriftControl.swift */,
 				78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */,
+				58BAB9B07FE2EC47F26A4EBF /* PipelineController.swift */,
 				AE54D17937FA4756A18641B5 /* PipelineCore.swift */,
 				7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */,
 			);
@@ -189,6 +199,7 @@
 		FF734C53B046401A82CA4493 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				F20246B223BC74E1AD33E509 /* PipelineHardwareSmokeTests.swift */,
 				5D7E813E0164D2C6C62956A7 /* SottoTests.swift */,
 			);
 			name = App;
@@ -358,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC306EB66288350596702AC /* PipelineHardwareSmokeTests.swift in Sources */,
 				565D32FAF1F407F86AD353AC /* SottoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +389,7 @@
 				351ACDC1C64AB266CC6D7777 /* GlobalHotkey.swift in Sources */,
 				CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */,
 				45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */,
+				CACF13ECF9658776C1207772 /* PipelineController.swift in Sources */,
 				7CF9D01D4D08508054DA06BF /* PipelineCore.swift in Sources */,
 				282F117030F4C923CDF3EFB4 /* RingBuffer.swift in Sources */,
 				814A321F8CABF94168522D57 /* SottoApp.swift in Sources */,
@@ -388,10 +401,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03394AD738C94CAB65EFE756 /* AudioDevice.swift in Sources */,
 				C2FD4EBCF11BE40FB3ADDB04 /* DriftControl.swift in Sources */,
 				9A56458A18174BE883AD06C4 /* DriftControlTests.swift in Sources */,
 				73AA6C4FF3D8657D83BC6641 /* NCProcessor.swift in Sources */,
 				5FDF29A85ED0F071604FA965 /* NCProcessorSmokeTests.swift in Sources */,
+				E27113F3A5C9A56B0A88EDE6 /* PipelineController.swift in Sources */,
+				118ACBBF4F4EA385DF77304A /* PipelineControllerTests.swift in Sources */,
 				74F088699187EF83AED49CDD /* PipelineCore.swift in Sources */,
 				9B94210855DC3EBA00274C41 /* PipelineCoreTests.swift in Sources */,
 				162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */,
