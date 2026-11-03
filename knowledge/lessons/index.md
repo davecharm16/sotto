@@ -15,3 +15,6 @@ relevant before planning new work.
 ## Lessons
 - [`pin-transitive-deps-proven-in-spike.md`](pin-transitive-deps-proven-in-spike.md): when a git dependency
   only builds with exact transitive pins, copy the pins the spike proved. Don't trust semver ranges.
+- [`xcode-env-leaks-into-cargo-and-tests.md`](xcode-env-leaks-into-cargo-and-tests.md): Xcode exports
+  `MACOSX_DEPLOYMENT_TARGET` to cargo, which forces 2+ minute rebuilds. The test host's `XCTestConfigurationFilePath`
+  is present but blank.

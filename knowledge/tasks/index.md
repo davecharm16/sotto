@@ -20,3 +20,5 @@ registry row current.
   `/sotto-team` orchestrator. **Done.**
 - [`2026-10-03-rearchitecture-assessment.md`](2026-10-03-rearchitecture-assessment.md): an assessment before
   "make NC work". **Done.** The decision doc waits on user decisions.
+- [`2026-10-04-phase-1.md`](2026-10-04-phase-1.md): Re-architecture Phase 1 (build, tests, signing, hotkey, libDF
+  wrap). **Done.** Next is Phase 2.

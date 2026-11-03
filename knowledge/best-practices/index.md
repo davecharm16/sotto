@@ -40,5 +40,6 @@ review — apply them together with the project-specific Continuous Best-Practic
 ## Topic docs
 - [`audio-threading.md`](audio-threading.md): which threads exist (tap, `SottoNCProcessing`, main actor), the ring
   buffers that pass audio between them, the 480-sample NC frame contract, and known real-time deviations.
-- [`rust-ffi-boundary.md`](rust-ffi-boundary.md): the opaque handle, the hand-maintained C header, `NCProcessor` as
-  the only Swift owner, and the stale-`libdeepfilter.a` build gotcha.
+- [`rust-ffi-boundary.md`](rust-ffi-boundary.md) (rewritten 2026-10-04 for the libDF wrap): the opaque handle, the hand-maintained C header, `NCProcessor` as
+  the only Swift owner, the embedded model, `catch_unwind`, atomic attenuation, the delayed bypass and the exact
+  pins.

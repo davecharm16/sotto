@@ -67,14 +67,14 @@ value reaches `df_set_attenuation`.
 are no Rust tests, no linter and no CI.
 
 ## Smells / open questions
-1. **NC is not suppressing anything.** *Confirmed at runtime 2026-10-03: 600/600 frames fail with "Expected 5 got
+1. ✅ *Fixed in the engine, Phase 1 (2026-10-04): libDF wrap, 7 cargo tests.* **NC is not suppressing anything.** *Confirmed at runtime 2026-10-03: 600/600 frames fail with "Expected 5 got
    1". See [0001](0001-rearchitecture-assessment.md) §2.* Parsing the bundled ONNX graphs shows that `erb_dec.onnx` expects
    `(emb, e3, e2, e1, e0)` from `enc.onnx`. `lib.rs:211` passes one raw `(1,1,32)` ERB tensor instead. The run should
    fail, `if let Ok` swallows the error, and the audio comes out as STFT→ISTFT resynthesis. The encoder, the
    `df_dec` deep-filter stage, the feature normalisation and the GRU state (`enc_hidden`… at `lib.rs:37-40`) are all
    loaded or declared but never used. None of this has been verified at runtime. Before fixing it, check whether the
    official `libDF` / `deep_filter` crate (tract streaming) would be a better replacement than a hand-rolled port.
-2. **The window probably breaks reconstruction.** A sin² window used for both analysis and synthesis at 50 % overlap
+2. ✅ *Fixed in Phase 1: the hand-rolled STFT was replaced by libDF.* **The window probably breaks reconstruction.** A sin² window used for both analysis and synthesis at 50 % overlap
    does not sum to a constant (it ripples between 0.5 and 1.0). The DeepFilterNet reference uses a Vorbis window.
 3. **Formats are assumed, not converted.** The tap uses the input node's hardware format and only ever reads channel
    0. Nothing resamples to the 48 kHz mono that the docs and the model assume (`AudioEngine.swift:86-88`).
@@ -92,14 +92,14 @@ are no Rust tests, no linter and no CI.
    (planned as E6.2).
 8. **Device changes need a restart.** Changing `selectedDevice` while NC is on only saves the UID. It does not
    restart the engine. Hot-plug refreshes the list but does not rebuild the engine (E5.3).
-9. **The hotkey is not installed until the menu has been opened once** (`SottoApp.swift:13-15`). A global key
+9. ✅ *Fixed in Phase 1: a Carbon hotkey registered at launch, with no Accessibility needed.* **The hotkey is not installed until the menu has been opened once** (`SottoApp.swift:13-15`). A global key
    monitor also needs Accessibility permission, which the app never asks for.
 10. **Dead or unwired code:** `OnboardingView` is never presented (E4.3 guidance is not reachable), and nothing calls
     `df_get_*`.
-11. **Bypass is not true passthrough.** It sets attenuation to 0 but still runs the STFT/ISTFT path, so any window
+11. ◐ *Bypass is fixed in Phase 1 (delayed and warm, bit-exact). Restoring a saved 0 % is still open (S5).* **Bypass is not true passthrough.** It sets attenuation to 0 but still runs the STFT/ISTFT path, so any window
     artefacts (item 2) remain. Saving an attenuation of 0 does not survive a restart: `restoreAttenuation` only
     accepts values > 0.
-12. **Docs disagree with each other.** ADR-0004 phases Apple Voice Processing first. The PRD supersedes that with
+12. ◐ *The signing part is fixed in Phase 1: ADR-0006 amended, builds signed. ADR-0004 vs. the PRD is still open.* **Docs disagree with each other.** ADR-0004 phases Apple Voice Processing first. The PRD supersedes that with
     DeepFilterNet3 first, and the code uses no Voice Processing and no AEC. ADR-0006 says "no signing", but
     `project.yml` sets `CODE_SIGN_STYLE: Automatic` + hardened runtime.
 13. **The mic is not being captured (added and confirmed 2026-10-03; see [0001](0001-rearchitecture-assessment.md)

@@ -13,9 +13,10 @@ Local real-time noise cancellation desktop app for macOS using DeepFilterNet3.
 - **Shipped** (git log, all 2026-04-26): Sprint 1 foundation, Sprint 2 DeepFilterNet3 ONNX inference with the
   strength slider, and Sprint 3 bypass, state icon, ⌘⇧N hotkey, launch at login and persisted settings. Commit
   `0994ee6` then added thread safety: ring-buffer handoff, a processing thread and an `NCProcessor` lock.
-- ⚠ **Noise reduction itself is unproven.** `DeepFilter/src/lib.rs` feeds `erb_dec.onnx` inputs that don't match
-  its graph, and the error is swallowed. See smell 1 in `knowledge/architecture/0000-system-overview.md` before
-  touching NC.
+- **The NC engine is proven offline (Phase 1, 2026-10-04).** `DeepFilter/` wraps upstream libDF `DfTract`, and 7
+  `cargo test` acceptance tests pass: noise is cut by −24 dB (pink) and −44 dB (white), SI-SDR improves by +8 to
+  +14 dB, latency is 1440 samples. ⚠ It has **not been heard end to end**: the mic isn't captured until Phase 2
+  (overview smell 13).
 - **Specs:** the PRD is `_bmad-output/planning-artifacts/prd.md`. The planned architecture is
   `_bmad-output/planning-artifacts/architecture.md`. Epics and stories (E1–E6) are in
   `_bmad-output/implementation-artifacts/epics-and-stories.md`. Decisions are in `ADR-Sotto.md` (the PRD supersedes
@@ -26,7 +27,10 @@ Local real-time noise cancellation desktop app for macOS using DeepFilterNet3.
 
 ## Current Phase
 
-**Sprints 1–3 + thread-safety fix landed (2026-04-26)**: next per the epics doc is Sprint 4 polish (E5 device change handling, E6 sleep/wake, error-state UI, performance validation) — but first prove NC actually suppresses noise.
+**Re-architecture**, on branch `rearch/phase-1`. The plan is `knowledge/architecture/0001-rearchitecture-assessment.md`
+§6, and `/sotto-team` runs it.
+- **Phase 1 done (2026-10-04):** build, tests, signing, the Carbon hotkey, and the libDF wrap.
+- **Next, Phase 2:** the two-engine audio pipeline (`coreaudio-engineer`). It needs BlackHole 2ch installed.
 
 ## Architecture
 
@@ -44,14 +48,19 @@ Local real-time noise cancellation desktop app for macOS using DeepFilterNet3.
 
 Prerequisites:
 - Xcode 15+
-- Rust toolchain (`rustup`)
+- Rust toolchain (`rustup`). The first build needs network access, for the libDF git dependency; after that it is
+  cached in `~/.cargo/git`.
 - xcodegen (`brew install xcodegen`)
+- The Apple Development identity for team `5QT5U69BN8` in the keychain, used for signing.
 
 ## Commands
 
 ```bash
 # Build Rust library
-cd DeepFilter && cargo build --release
+cd DeepFilter && cargo build --release --locked
+
+# NC acceptance tests (noise reduction, SI-SDR, latency, bypass, slider, perf)
+cd DeepFilter && cargo test --release --locked -- --test-threads=1
 
 # Regenerate Xcode project
 xcodegen generate
@@ -62,15 +71,20 @@ xcodebuild -scheme Sotto -configuration Debug build
 # Run
 open ~/Library/Developer/Xcode/DerivedData/Sotto-*/Build/Products/Debug/Sotto.app  # -scheme builds go to DerivedData, not ./build
 
-# Test (SottoTests; needs a machine with real CoreAudio devices)
+# Test: SottoCoreTests runs headless; SottoTests (hosted) skips when there's no input device
 xcodebuild -scheme Sotto -configuration Debug test
+
+# Release build (arm64 only)
+xcodebuild -scheme Sotto -configuration Release build
 
 # Refresh the code graph (no LLM)
 graphify update .
 ```
 
-- The Xcode pre-build script runs `cargo build --release` **only if** `DeepFilter/target/release/libdeepfilter.a` is
-  missing. After you edit `DeepFilter/src/lib.rs`, rebuild it yourself, or Xcode silently links the stale library.
+- The Xcode pre-build script **always** runs `cargo build --release --locked`, which takes about 0.5 s when nothing
+  changed. It unsets `MACOSX_DEPLOYMENT_TARGET`, and `DeepFilter/.cargo/config.toml` pins that variable to 13.0, so
+  Xcode and terminal builds share one cache. `DeepFilter/Cargo.lock` is committed and holds exact pins; see
+  `knowledge/lessons/pin-transitive-deps-proven-in-spike.md`.
 - There is no linter, formatter or CI, and no env vars, secrets or seed data. Settings live in `UserDefaults` under
   the keys `selectedDeviceUID`, `attenuation` and `launchAtLogin`.
 
@@ -83,7 +97,8 @@ Before building: nothing to add — the DeepFilterNet3 model ships in the repo.
 ## Code layout
 
 This is the binding map. Put new code where its layer already lives.
-- **App entry / scene / global hotkey:** `Sotto/SottoApp.swift`
+- **App entry / scenes:** `Sotto/SottoApp.swift`. Launch-time work lives in `Sotto/AppDelegate.swift`: it owns
+  `AudioManager` and registers the ⌘⇧N Carbon hotkey from `Sotto/GlobalHotkey.swift`.
 - **State and orchestration:** `Sotto/Audio/AudioManager.swift`. This is the single `@MainActor ObservableObject`.
   It owns every UI-visible state and every `UserDefaults` write. It is injected with `.environmentObject`.
 - **Audio pipeline (engine graph, tap, processing thread):** `Sotto/Audio/AudioEngine.swift` + `RingBuffer.swift`
@@ -102,9 +117,11 @@ This is the binding map. Put new code where its layer already lives.
 ```
 Sotto/
 ├── DeepFilter/              # Rust staticlib for DeepFilterNet3
-│   ├── Cargo.toml
+│   ├── Cargo.toml, Cargo.lock   # exact libDF/tract pins
+│   ├── .cargo/config.toml       # MACOSX_DEPLOYMENT_TARGET=13.0
 │   ├── build.rs
-│   └── src/lib.rs
+│   ├── src/lib.rs               # thin FFI wrap over libDF DfTract
+│   └── tests/nc_offline.rs      # NC acceptance tests (+ CMU ARCTIC fixtures)
 ├── Sotto/                   # Swift source
 │   ├── Audio/               # AudioManager, AudioEngine, NCProcessor, DeviceMonitor, RingBuffer
 │   ├── Models/              # AudioDevice
@@ -112,10 +129,14 @@ Sotto/
 │   ├── Resources/           # DeepFilterNet3 ONNX models + config.ini (committed); BlackHole/ (README; optional .pkg)
 │   ├── Assets.xcassets      # AppIcon set (empty)
 │   ├── SottoApp.swift
+│   ├── AppDelegate.swift    # owns AudioManager, registers the hotkey at launch
+│   ├── GlobalHotkey.swift   # Carbon RegisterEventHotKey (no Accessibility)
 │   ├── Info.plist
 │   ├── Sotto.entitlements
 │   └── DeepFilter-Bridging-Header.h
 ├── Tests/
+│   ├── Core/                # SottoCoreTests: unhosted, headless (NC smoke test)
+│   └── App/                 # SottoTests: hosted, skips without an input device
 ├── _bmad-output/            # PRD, planned architecture, epics & stories
 ├── knowledge/               # daVinci knowledge base (architecture, domain features, best practices, design)
 ├── ADR-Sotto.md             # Architecture decision records
@@ -128,7 +149,8 @@ Sotto/
 ## Key Decisions (see ADR-Sotto.md)
 
 - **Local-only processing** — no audio leaves the device
-- **Personal-use scope** — no code signing, sandboxing, or notarization
+- **Personal-use scope**: signed with a personal Apple Development identity (team `5QT5U69BN8`) so TCC grants stay
+  stable. No sandboxing, notarization or distribution. See ADR-0006, amended 2026-10-04.
 - **Platform:** macOS 13.0+ (SwiftUI + AVAudioEngine)
 - **NC engine** — Rust staticlib for cross-platform reuse
 
