@@ -9,13 +9,18 @@
 /* Begin PBXBuildFile section */
 		0FDED68A18D28B2138D529FA /* enc.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 63684B8783374F046167FD87 /* enc.onnx */; };
 		11455AAC15ED76A64B3EA530 /* erb_dec.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 19587550198656ED5774BFF9 /* erb_dec.onnx */; };
+		162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */; };
 		282F117030F4C923CDF3EFB4 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */; };
+		351ACDC1C64AB266CC6D7777 /* GlobalHotkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93ACDB34463DDACC51075634 /* GlobalHotkey.swift */; };
 		3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */; };
 		3BAE91EE86F7C0C917BDB92C /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88C591F90C5A5E884FB75 /* AudioDevice.swift */; };
 		3E2C2FFC65CB6B7AC729C749 /* config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7CE6D1212721F5D6C9CD8ACD /* config.ini */; };
-		3ECF7F4297FCDF7D4D6D0142 /* SottoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */; };
 		45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */; };
 		4B19D303D244BABED03983DF /* AudioLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */; };
+		565D32FAF1F407F86AD353AC /* SottoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E813E0164D2C6C62956A7 /* SottoTests.swift */; };
+		5FDF29A85ED0F071604FA965 /* NCProcessorSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */; };
+		6EB4D6B40005F4F290F2EA38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC96F56B7119C9C705911EF /* AppDelegate.swift */; };
+		73AA6C4FF3D8657D83BC6641 /* NCProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */; };
 		814A321F8CABF94168522D57 /* SottoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */; };
 		8515394BB3F9504FC74BB4A9 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63B057343FB5A6F3463D2D /* AudioEngine.swift */; };
 		9A02650A5C74F5691FC4D63C /* df_dec.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 3D8FC91847F16550A00797BE /* df_dec.onnx */; };
@@ -44,38 +49,44 @@
 		35AE106A0C8D9B91FD6D29AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3A63B057343FB5A6F3463D2D /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
 		3D8FC91847F16550A00797BE /* df_dec.onnx */ = {isa = PBXFileReference; path = df_dec.onnx; sourceTree = "<group>"; };
-		3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoTests.swift; sourceTree = "<group>"; };
+		4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCProcessorSmokeTests.swift; sourceTree = "<group>"; };
 		4632ACC153A13ABA01A5D170 /* DevicePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePickerView.swift; sourceTree = "<group>"; };
 		48E88C591F90C5A5E884FB75 /* AudioDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDevice.swift; sourceTree = "<group>"; };
+		4BC96F56B7119C9C705911EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLevelView.swift; sourceTree = "<group>"; };
+		5D7E813E0164D2C6C62956A7 /* SottoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoTests.swift; sourceTree = "<group>"; };
 		63684B8783374F046167FD87 /* enc.onnx */ = {isa = PBXFileReference; path = enc.onnx; sourceTree = "<group>"; };
 		7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
 		78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCProcessor.swift; sourceTree = "<group>"; };
 		7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMonitor.swift; sourceTree = "<group>"; };
 		7CE6D1212721F5D6C9CD8ACD /* config.ini */ = {isa = PBXFileReference; path = config.ini; sourceTree = "<group>"; };
 		7E03AE1021C1145073976824 /* SottoMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoMenuView.swift; sourceTree = "<group>"; };
+		93ACDB34463DDACC51075634 /* GlobalHotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkey.swift; sourceTree = "<group>"; };
 		AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SottoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1B25E6714CF4F0556E5527F /* SottoCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SottoCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53ACB44A361763F4C050754 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB353666F0C36BD193807424 /* Sotto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sotto.entitlements; sourceTree = "<group>"; };
 		E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		03EE21664FE912C42CCE7A3C /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				3FCB2A61E8E9B4BF935B8543 /* SottoTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		07C7A75DD616D67B55F582A9 = {
 			isa = PBXGroup;
 			children = (
+				FF734C53B046401A82CA4493 /* App */,
+				1D81146000240E2550C1C5F1 /* Core */,
 				F7A77228DAEC010D8D9B62AC /* Sotto */,
-				03EE21664FE912C42CCE7A3C /* Tests */,
 				AE528EBD8D688E7864DA0F83 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		1D81146000240E2550C1C5F1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */,
+			);
+			name = Core;
+			path = Tests/Core;
 			sourceTree = "<group>";
 		};
 		3942EF9B29E273E8176B0E01 /* Models */ = {
@@ -124,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2A94A254F9B50269EE1EAB8A /* Sotto.app */,
+				C1B25E6714CF4F0556E5527F /* SottoCoreTests.xctest */,
 				AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */,
 			);
 			name = Products;
@@ -140,7 +152,9 @@
 		F7A77228DAEC010D8D9B62AC /* Sotto */ = {
 			isa = PBXGroup;
 			children = (
+				4BC96F56B7119C9C705911EF /* AppDelegate.swift */,
 				C53ACB44A361763F4C050754 /* Assets.xcassets */,
+				93ACDB34463DDACC51075634 /* GlobalHotkey.swift */,
 				35AE106A0C8D9B91FD6D29AB /* Info.plist */,
 				CB353666F0C36BD193807424 /* Sotto.entitlements */,
 				E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */,
@@ -152,9 +166,36 @@
 			path = Sotto;
 			sourceTree = "<group>";
 		};
+		FF734C53B046401A82CA4493 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5D7E813E0164D2C6C62956A7 /* SottoTests.swift */,
+			);
+			name = App;
+			path = Tests/App;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9F4E7E267FA6EDEC64362AE2 /* SottoCoreTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89F03C2443AF3C794FFF2797 /* Build configuration list for PBXNativeTarget "SottoCoreTests" */;
+			buildPhases = (
+				9AFBE2C680B0842F7B4A6EA3 /* Build Rust Library */,
+				F52EFF2E7364F7B1A7CE9E01 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SottoCoreTests;
+			packageProductDependencies = (
+			);
+			productName = SottoCoreTests;
+			productReference = C1B25E6714CF4F0556E5527F /* SottoCoreTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BD7C3AF9616605CCB1F1C0C7 /* SottoTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66BB9463C1E4C319D70BD280 /* Build configuration list for PBXNativeTarget "SottoTests" */;
@@ -201,10 +242,16 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					9F4E7E267FA6EDEC64362AE2 = {
+						DevelopmentTeam = 5QT5U69BN8;
+						ProvisioningStyle = Automatic;
+					};
 					BD7C3AF9616605CCB1F1C0C7 = {
+						DevelopmentTeam = 5QT5U69BN8;
 						ProvisioningStyle = Automatic;
 					};
 					FED82104CD54FDCBF3A1311B = {
+						DevelopmentTeam = 5QT5U69BN8;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -224,6 +271,7 @@
 			projectRoot = "";
 			targets = (
 				FED82104CD54FDCBF3A1311B /* Sotto */,
+				9F4E7E267FA6EDEC64362AE2 /* SottoCoreTests */,
 				BD7C3AF9616605CCB1F1C0C7 /* SottoTests */,
 			);
 		};
@@ -245,6 +293,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9AFBE2C680B0842F7B4A6EA3 /* Build Rust Library */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Rust Library";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$HOME/.cargo/bin:$PATH\"\nunset MACOSX_DEPLOYMENT_TARGET\ncd \"${PROJECT_DIR}/DeepFilter\"\ncargo build --release --locked\n";
+		};
 		FE749F3640E2176921D81A11 /* Build Rust Library */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -262,7 +329,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${PROJECT_DIR}/DeepFilter\"\nif [ ! -f \"target/release/libdeepfilter.a\" ]; then\n  cargo build --release\nfi\n";
+			shellScript = "export PATH=\"$HOME/.cargo/bin:$PATH\"\nunset MACOSX_DEPLOYMENT_TARGET\ncd \"${PROJECT_DIR}/DeepFilter\"\ncargo build --release --locked\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -271,7 +338,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ECF7F4297FCDF7D4D6D0142 /* SottoTests.swift in Sources */,
+				565D32FAF1F407F86AD353AC /* SottoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,17 +346,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB4D6B40005F4F290F2EA38 /* AppDelegate.swift in Sources */,
 				3BAE91EE86F7C0C917BDB92C /* AudioDevice.swift in Sources */,
 				8515394BB3F9504FC74BB4A9 /* AudioEngine.swift in Sources */,
 				4B19D303D244BABED03983DF /* AudioLevelView.swift in Sources */,
 				D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */,
 				3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */,
 				F75B925CAB9C346C9CCA246D /* DevicePickerView.swift in Sources */,
+				351ACDC1C64AB266CC6D7777 /* GlobalHotkey.swift in Sources */,
 				CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */,
 				45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */,
 				282F117030F4C923CDF3EFB4 /* RingBuffer.swift in Sources */,
 				814A321F8CABF94168522D57 /* SottoApp.swift in Sources */,
 				E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F52EFF2E7364F7B1A7CE9E01 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73AA6C4FF3D8657D83BC6641 /* NCProcessor.swift in Sources */,
+				5FDF29A85ED0F071604FA965 /* NCProcessorSmokeTests.swift in Sources */,
+				162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +383,52 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		02C2080FE44F2F2833D81A52 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/DeepFilter/target/release",
+				);
+				OTHER_LDFLAGS = (
+					"-ldeepfilter",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app.coretests;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sotto/DeepFilter-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		07DF85FC250EDA111964E9FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/DeepFilter/target/release",
+				);
+				OTHER_LDFLAGS = (
+					"-ldeepfilter",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sotto.app.coretests;
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sotto/DeepFilter-Bridging-Header.h";
+			};
+			name = Release;
+		};
 		1484EF6CB1FA9F082FBB6337 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -331,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -363,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 5QT5U69BN8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -390,6 +517,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -405,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -437,6 +566,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 5QT5U69BN8;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -494,6 +624,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -522,6 +653,15 @@
 			buildConfigurations = (
 				D075EB8B8CFF6935A1B89895 /* Debug */,
 				3C5B716393C8970FB2CB654D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		89F03C2443AF3C794FFF2797 /* Build configuration list for PBXNativeTarget "SottoCoreTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				02C2080FE44F2F2833D81A52 /* Debug */,
+				07DF85FC250EDA111964E9FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

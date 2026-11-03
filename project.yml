@@ -10,7 +10,11 @@ settings:
   base:
     SWIFT_VERSION: "5.9"
     MACOSX_DEPLOYMENT_TARGET: "13.0"
+    # libdeepfilter.a is built for the host only; there is no Intel build (ADR decision D2).
+    ARCHS: arm64
+    # A stable Apple Development signature keeps the TCC mic grant across rebuilds (ADR-0006).
     CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 5QT5U69BN8
     ENABLE_HARDENED_RUNTIME: YES
 
 targets:
@@ -39,23 +43,51 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies: []
     preBuildScripts:
-      - name: Build Rust Library
+      # Always run: cargo is a ~0.5 s no-op when nothing changed, and it is the only thing that knows when
+      # libdeepfilter.a is stale. The linker's dependency info then relinks whenever the .a changes.
+      # tract-linalg's build script tracks MACOSX_DEPLOYMENT_TARGET, which Xcode exports and a terminal doesn't;
+      # unsetting it stops Xcode and terminal cargo runs from forcing each other into a full rebuild.
+      - &cargoBuild
+        name: Build Rust Library
         script: |
+          export PATH="$HOME/.cargo/bin:$PATH"
+          unset MACOSX_DEPLOYMENT_TARGET
           cd "${PROJECT_DIR}/DeepFilter"
-          if [ ! -f "target/release/libdeepfilter.a" ]; then
-            cargo build --release
-          fi
+          cargo build --release --locked
         basedOnDependencyAnalysis: false
 
+  # Unhosted: runs inside xctest, so no app launch, menu-bar icon or audio hardware is involved.
+  SottoCoreTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: Tests/Core
+      - path: Sotto/Audio/NCProcessor.swift
+      - path: Sotto/Audio/RingBuffer.swift
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.sotto.app.coretests
+        SWIFT_OBJC_BRIDGING_HEADER: Sotto/DeepFilter-Bridging-Header.h
+        LIBRARY_SEARCH_PATHS:
+          - "$(PROJECT_DIR)/DeepFilter/target/release"
+        OTHER_LDFLAGS:
+          - "-ldeepfilter"
+    # Not a dependency on Sotto (that would make it hosted), so it builds the Rust lib itself.
+    preBuildScripts:
+      - *cargoBuild
+
+  # Hosted in Sotto.app: for tests that need the app module or real CoreAudio devices.
   SottoTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: Tests
+      - path: Tests/App
     dependencies:
       - target: Sotto
     settings:
       base:
+        GENERATE_INFOPLIST_FILE: YES
         PRODUCT_BUNDLE_IDENTIFIER: com.sotto.app.tests
 
 schemes:
@@ -68,6 +100,7 @@ schemes:
     test:
       config: Debug
       targets:
+        - SottoCoreTests
         - SottoTests
     profile:
       config: Release

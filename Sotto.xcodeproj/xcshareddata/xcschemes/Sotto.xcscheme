@@ -44,6 +44,17 @@
             parallelizable = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9F4E7E267FA6EDEC64362AE2"
+               BuildableName = "SottoCoreTests.xctest"
+               BlueprintName = "SottoCoreTests"
+               ReferencedContainer = "container:Sotto.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD7C3AF9616605CCB1F1C0C7"
                BuildableName = "SottoTests.xctest"
                BlueprintName = "SottoTests"
