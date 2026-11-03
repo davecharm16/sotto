@@ -32,7 +32,7 @@ class AudioManager: ObservableObject {
     @Published var attenuation: Float = 1.0 {
         didSet {
             controller.setAttenuation(isBypassed ? 0 : attenuation)
-            UserDefaults.standard.set(attenuation, forKey: "attenuation")
+            UserDefaults.standard.set(attenuation, forKey: SettingsStore.attenuationKey)
         }
     }
     @Published var isBypassed: Bool = false {
@@ -40,12 +40,11 @@ class AudioManager: ObservableObject {
             controller.setAttenuation(isBypassed ? 0 : attenuation)
         }
     }
+    /// Mirrors `SMAppService.mainApp.status`, which is the source of truth (nothing is stored in UserDefaults).
     @Published var launchAtLogin: Bool = false {
-        didSet {
-            setLaunchAtLogin(launchAtLogin)
-            UserDefaults.standard.set(launchAtLogin, forKey: "launchAtLogin")
-        }
+        didSet { if launchAtLogin != oldValue { setLaunchAtLogin(launchAtLogin) } }
     }
+    @Published private(set) var micStatus: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .audio)
 
     private let controller = PipelineController(
         modelPath: Bundle.main.path(forResource: "config", ofType: "ini", inDirectory: "DeepFilterNet3")
@@ -129,6 +128,7 @@ class AudioManager: ObservableObject {
     }
 
     private func fail(_ error: AudioStartError) {
+        if error == .noMicPermission { micStatus = AVCaptureDevice.authorizationStatus(for: .audio) }
         lastError = error
         isEnabled = false
     }
@@ -162,30 +162,36 @@ class AudioManager: ObservableObject {
     }
 
     private func restoreAttenuation() {
-        let saved = UserDefaults.standard.float(forKey: "attenuation")
-        if saved > 0 {
-            attenuation = saved
-        }
+        if let saved = SettingsStore.savedAttenuation() { attenuation = saved }
     }
 
     private func restoreLaunchAtLogin() {
-        launchAtLogin = UserDefaults.standard.bool(forKey: "launchAtLogin")
+        launchAtLogin = Self.isRequested(SMAppService.mainApp.status)
     }
 
+    /// `.requiresApproval` means registered and waiting on the user, so the toggle stays on and we don't re-register.
+    private static func isRequested(_ status: SMAppService.Status) -> Bool {
+        status == .enabled || status == .requiresApproval
+    }
+
+    /// Only talks to SMAppService when the request differs from its status, so restoring never re-registers.
     private func setLaunchAtLogin(_ enabled: Bool) {
-        if #available(macOS 13.0, *) {
-            do {
-                if enabled {
-                    try SMAppService.mainApp.register()
-                } else {
-                    try SMAppService.mainApp.unregister()
-                }
-            } catch {
-                // SMAppService requires code signing — silently ignore for unsigned builds
-                if launchAtLogin {
-                    launchAtLogin = false
-                }
-            }
+        let service = SMAppService.mainApp
+        guard enabled != Self.isRequested(service.status) else { return }
+        do {
+            if enabled { try service.register() } else { try service.unregister() }
+        } catch {
+            NSLog("Sotto: launch at login change failed: \(error)")
+        }
+        if enabled && service.status == .requiresApproval { SMAppService.openSystemSettingsLoginItems() }
+        launchAtLogin = Self.isRequested(service.status)   // show what actually happened
+    }
+
+    /// Triggers the system prompt when undetermined (onboarding); a denied status can only be changed in Settings.
+    func requestMicrophoneAccess() {
+        Task {
+            _ = await PipelineController.systemMicAccess()
+            micStatus = AVCaptureDevice.authorizationStatus(for: .audio)
         }
     }
 

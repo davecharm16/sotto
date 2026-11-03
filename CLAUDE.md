@@ -86,7 +86,7 @@ graphify update .
   Xcode and terminal builds share one cache. `DeepFilter/Cargo.lock` is committed and holds exact pins; see
   `knowledge/lessons/pin-transitive-deps-proven-in-spike.md`.
 - There is no linter, formatter or CI, and no env vars, secrets or seed data. Settings live in `UserDefaults` under
-  the keys `selectedDeviceUID`, `attenuation` and `launchAtLogin`.
+  the keys `selectedDeviceUID`, `attenuation` and `hasCompletedOnboarding` (launch at login mirrors `SMAppService` status).
 
 ## Required Resources
 
