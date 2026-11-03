@@ -1,0 +1,29 @@
+name: CoreSpike
+options:
+  deploymentTarget:
+    macOS: "13.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+targets:
+  SottoCoreTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: /Users/davecharm.bulaquena/Documents/personal/sotto/Sotto/Audio/RingBuffer.swift
+      - path: /Users/davecharm.bulaquena/Documents/personal/sotto/Sotto/Audio/NCProcessor.swift
+      - path: Tests
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.sotto.coretests
+        SWIFT_OBJC_BRIDGING_HEADER: /Users/davecharm.bulaquena/Documents/personal/sotto/Sotto/DeepFilter-Bridging-Header.h
+        LIBRARY_SEARCH_PATHS: /Users/davecharm.bulaquena/Documents/personal/sotto/DeepFilter/target/release
+        OTHER_LDFLAGS: ["-ldeepfilter"]
+schemes:
+  SottoCoreTests:
+    build:
+      targets:
+        SottoCoreTests: [test]
+    test:
+      targets: [SottoCoreTests]

@@ -61,8 +61,27 @@ struct SottoMenuView: View {
         .padding(.vertical, 8)
     }
 
+    @ViewBuilder
+    private var errorBanner: some View {
+        if let error = audioManager.lastError {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(error.localizedDescription)
+                    .font(.caption)
+                    .foregroundColor(.red)
+                    .fixedSize(horizontal: false, vertical: true)
+                if let url = error.settingsURL {
+                    Button("Open Microphone Settings") { NSWorkspace.shared.open(url) }
+                        .font(.caption)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
     private var mainControls: some View {
         VStack(spacing: 12) {
+            errorBanner
+
             HStack {
                 Toggle("Noise Cancellation", isOn: $audioManager.isEnabled)
                     .toggleStyle(.switch)

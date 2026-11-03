@@ -1,0 +1,6 @@
+# tract-linalg's build script assembles its SIMD kernels with `cc`. Without this, `cc` stamps them with the host
+# SDK's macOS version (26.0 on the dev Mac), and ld warns once per object when Sotto links them for macOS 13.0.
+# Set here rather than by the caller, so terminal and Xcode builds see the same value. tract-linalg tracks this
+# variable, and a value that differs between callers forces a multi-minute rebuild.
+[env]
+MACOSX_DEPLOYMENT_TARGET = "13.0"

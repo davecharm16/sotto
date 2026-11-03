@@ -27,7 +27,8 @@ Podfile.lock
 
 # Rust (for DeepFilterNet integration)
 target/
-Cargo.lock
+# Cargo.lock is committed: the build uses --locked with exact transitive pins
+# (knowledge/lessons/pin-transitive-deps-proven-in-spike.md)
 
 # macOS
 .DS_Store
@@ -61,3 +62,11 @@ _bmad/
 # Test artifacts
 *.xcresult
 coverage/
+
+# brownfield adoption scratch (delete after synthesis)
+knowledge/_intake/
+
+# AI tool copies / generated graph (regenerate with `graphify update .`)
+.agent/
+.kiro/
+graphify-out/

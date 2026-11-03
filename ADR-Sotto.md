@@ -163,7 +163,7 @@ All audio processing happens **locally on the user's device**. No network calls 
 
 ## ADR-0006 — Personal-use scope; defer signing, sandboxing, distribution
 
-**Status:** Accepted — 2026-04-25 · Revisit if scope changes
+**Status:** Accepted — 2026-04-25 · Amended 2026-10-04 (development signing) · Revisit if scope changes
 
 ### Context
 
@@ -175,15 +175,21 @@ For a tool the developer builds for themselves, none of this is necessary.
 
 - Build Sotto for **personal use only** in the current phase.
 - Disable App Sandbox locally to simplify CoreAudio device routing.
-- Skip code signing, notarization, and installer work.
+- **Amended 2026-10-04:** sign every build with the developer's personal **Apple Development** identity (team
+  `5QT5U69BN8`, Automatic signing, hardened runtime on, bundle id `com.sotto.app`). An ad-hoc signature changes on
+  every build, and macOS ties TCC grants (microphone) to the signature's designated requirement, so ad-hoc builds
+  lost the mic grant on each rebuild. The Apple Development requirement (bundle id + certificate) stays stable.
+- Still **no** notarization, App Sandbox, Developer ID, installer or distribution.
 - Document setup as developer-facing (Xcode + Homebrew), not consumer-facing.
 
 ### Consequences
 
 - **+** Faster iteration; no Apple-process gating.
-- **+** Free — no Developer Program fee yet.
-- **−** Not shareable with non-developer users.
-- **−** Each macOS major version upgrade may require a rebuild and re-grant of permissions.
+- **+** No Developer Program fee needed: an Apple Development certificate is enough for local builds.
+- **+** The microphone grant survives rebuilds.
+- **−** Building requires that identity in the keychain and the team in Xcode; another machine needs its own team.
+- **−** The certificate expires (2027-04-16); renew it in Xcode before then.
+- **−** Not shareable with non-developer users: Apple Development builds are not notarized.
 - **!** A scope change to "share with friends" or "ship publicly" requires revisiting ADR-0002 (driver), this ADR (signing), and adding new ADRs for installer and update mechanism.
 
 ---

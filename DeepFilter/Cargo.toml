@@ -1,21 +1,45 @@
 [package]
 name = "deepfilter-ffi"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [lib]
 name = "deepfilter"
-crate-type = ["staticlib"]
+# staticlib: linked by Xcode (-ldeepfilter). rlib: lets tests/nc_offline.rs drive the exported df_* functions.
+crate-type = ["staticlib", "rlib"]
 
 [dependencies]
-tract-onnx = "0.21"
-tract-core = "0.21"
+# Upstream libDF (MIT OR Apache-2.0) at a fixed rev. `default-model` embeds DeepFilterNet3_onnx.tar.gz (v0.5.6
+# model, ~7.9 MB) so df_create(NULL) needs no bundle assets. We never enable libDF's `capi` feature: its df_create
+# clashes with ours and it panics across FFI.
+deep_filter = { git = "https://github.com/Rikorose/DeepFilterNet", rev = "d375b2d8309e0935d165700c91da9de862a99c31", default-features = false, features = ["tract", "default-model"] }
 ndarray = "0.15"
-realfft = "3.3"
-num-complex = "0.4"
 
+# Exact pins proven by the 2026-10-03 spike (knowledge/lessons/pin-transitive-deps-proven-in-spike.md). Do not loosen:
+# - tract 0.21.5+ breaks libDF d375b2d (0.21.15+ moved to ndarray 0.16 and removed `symbol_table`); libDF is on
+#   ndarray 0.15. Re-check only when libDF moves to ndarray 0.16.
+# - kstring (pulled in by tract-linalg's build-time `liquid`) 2.0.5 needs rustc 1.96; 2.0.2 builds on 1.95.
+# Cargo.lock is committed; build with `--locked` so drift fails loudly.
+tract-core = "=0.21.4"
+tract-onnx = "=0.21.4"
+tract-hir = "=0.21.4"
+tract-pulse = "=0.21.4"
+tract-data = "=0.21.4"
+tract-linalg = "=0.21.4"
+tract-nnef = "=0.21.4"
+kstring = "=2.0.2"
+
+[dev-dependencies]
+hound = "3.5"
+flate2 = "1"
+tar = "0.4"
+
+# panic must stay "unwind" (the default): every export relies on catch_unwind.
+# No `lto`: Cargo cannot LTO a lib whose crate-type includes rlib. Here, `lto = true` only LTO'd the test binaries,
+# so the perf tests no longer measured the shipped code, and it padded the .a with embedded LLVM 22 bitcode
+# (123.6 MB vs 47.5 MB) that Xcode's nm can't read. Measured through the C ABI (2026-10-04), a staticlib-only LTO
+# build is no faster (about 0.68 ms/frame mean either way); it only links about 5 MB smaller.
 [profile.release]
 opt-level = 3
-lto = true
 codegen-units = 1
 strip = true

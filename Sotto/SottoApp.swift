@@ -1,18 +1,23 @@
 import SwiftUI
-import Carbon.HIToolbox
 
 @main
 struct SottoApp: App {
-    @StateObject private var audioManager = AudioManager()
-    @State private var hotkeyMonitor: Any?
+    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
+
+    var body: some Scene {
+        SottoMenuBar(audioManager: appDelegate.audioManager)
+    }
+}
+
+/// A separate `Scene` observing the manager, so the menu-bar icon follows state changes made outside the menu
+/// (for example the ⌘⇧N hotkey while the menu is closed).
+private struct SottoMenuBar: Scene {
+    @ObservedObject var audioManager: AudioManager
 
     var body: some Scene {
         MenuBarExtra {
             SottoMenuView()
                 .environmentObject(audioManager)
-                .onAppear {
-                    setupGlobalHotkey()
-                }
         } label: {
             Label("Sotto", systemImage: menuBarIcon)
         }
@@ -26,19 +31,6 @@ struct SottoApp: App {
             return "waveform.slash"
         } else {
             return "waveform.circle.fill"
-        }
-    }
-
-    private func setupGlobalHotkey() {
-        guard hotkeyMonitor == nil else { return }
-
-        // Cmd+Shift+N to toggle NC
-        hotkeyMonitor = NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { event in
-            if event.modifierFlags.contains([.command, .shift]) && event.keyCode == 45 { // N key
-                Task { @MainActor in
-                    audioManager.isEnabled.toggle()
-                }
-            }
         }
     }
 }

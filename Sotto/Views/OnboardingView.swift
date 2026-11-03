@@ -1,8 +1,9 @@
+import AVFoundation
 import SwiftUI
 
 struct OnboardingView: View {
     @EnvironmentObject var audioManager: AudioManager
-    @Binding var isPresented: Bool
+    let onFinish: () -> Void
 
     var body: some View {
         VStack(spacing: 16) {
@@ -10,33 +11,55 @@ struct OnboardingView: View {
                 .font(.system(size: 48))
                 .foregroundColor(.accentColor)
 
-            Text("Setup Complete!")
+            Text("Welcome to Sotto")
                 .font(.title2)
                 .fontWeight(.semibold)
 
-            Text("Now configure your communication apps to use **BlackHole 2ch** as the input device.")
-                .multilineTextAlignment(.center)
-                .foregroundColor(.secondary)
-
-            VStack(alignment: .leading, spacing: 8) {
-                setupStep("1", "Open Zoom, Meet, or Discord")
-                setupStep("2", "Go to Audio Settings")
-                setupStep("3", "Select 'BlackHole 2ch' as input")
+            VStack(alignment: .leading, spacing: 12) {
+                blackHoleStep
+                microphoneStep
+                setupStep("3", "Toggle noise cancellation with \u{2318}\u{21E7}N, then pick **BlackHole 2ch** as the input in Zoom, Meet or Discord.")
             }
             .padding()
             .background(Color.secondary.opacity(0.1))
             .cornerRadius(8)
 
-            Button("Got it") {
-                isPresented = false
-            }
-            .buttonStyle(.borderedProminent)
+            Button("Done", action: onFinish)
+                .buttonStyle(.borderedProminent)
         }
         .padding()
-        .frame(width: 320)
+        .frame(width: 340)
     }
 
-    private func setupStep(_ number: String, _ text: String) -> some View {
+    private var blackHoleStep: some View {
+        setupStep("1", audioManager.isBlackHoleInstalled ? "BlackHole 2ch is installed." : "Install BlackHole 2ch, the virtual mic other apps listen to.") {
+            if !audioManager.isBlackHoleInstalled {
+                HStack {
+                    Button("Get BlackHole") { audioManager.installBlackHole() }
+                    Button("Check Again") { audioManager.checkBlackHoleStatus() }
+                }
+                .font(.caption)
+            }
+        }
+    }
+
+    private var microphoneStep: some View {
+        setupStep("2", audioManager.micStatus == .authorized ? "Microphone access is on." : "Allow Sotto to use your microphone.") {
+            switch audioManager.micStatus {
+            case .authorized:
+                EmptyView()
+            case .notDetermined:
+                Button("Allow Microphone") { audioManager.requestMicrophoneAccess() }
+                    .font(.caption)
+            default:
+                Button("Open Microphone Settings") { NSWorkspace.shared.open(AudioStartError.microphoneSettingsURL) }
+                    .font(.caption)
+            }
+        }
+    }
+
+    private func setupStep<Accessory: View>(_ number: String, _ text: LocalizedStringKey,
+                                            @ViewBuilder accessory: () -> Accessory = { EmptyView() }) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Text(number)
                 .font(.caption)
@@ -46,8 +69,11 @@ struct OnboardingView: View {
                 .background(Color.accentColor)
                 .clipShape(Circle())
 
-            Text(text)
-                .font(.callout)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(text)
+                    .font(.callout)
+                accessory()
+            }
         }
     }
 }
