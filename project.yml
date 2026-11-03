@@ -64,6 +64,8 @@ targets:
       - path: Tests/Core
       - path: Sotto/Audio/NCProcessor.swift
       - path: Sotto/Audio/RingBuffer.swift
+      - path: Sotto/Audio/DriftControl.swift
+      - path: Sotto/Audio/PipelineCore.swift
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES

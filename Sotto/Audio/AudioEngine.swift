@@ -21,8 +21,8 @@ class AudioEngine {
     )!
 
     private let frameSize = 480
-    private let inputRingBuffer: RingBuffer
-    private let outputRingBuffer: RingBuffer
+    private let inputRingBuffer: SPSCFloatRing
+    private let outputRingBuffer: SPSCFloatRing
     private var processingThread: Thread?
     private var isRunning = false
     private let processingLock = NSCondition()
@@ -32,8 +32,8 @@ class AudioEngine {
         self.outputDevice = outputDevice
 
         // Ring buffers: ~100ms capacity (4800 samples at 48kHz)
-        self.inputRingBuffer = RingBuffer(capacity: 4800)
-        self.outputRingBuffer = RingBuffer(capacity: 4800)
+        self.inputRingBuffer = SPSCFloatRing(minimumCapacity: 4800)
+        self.outputRingBuffer = SPSCFloatRing(minimumCapacity: 4800)
 
         if let configPath = Bundle.main.path(forResource: "config", ofType: "ini", inDirectory: "DeepFilterNet3") {
             let modelDir = (configPath as NSString).deletingLastPathComponent
@@ -142,7 +142,7 @@ class AudioEngine {
             processBuffer.withUnsafeMutableBufferPointer { ptr in
                 guard let base = ptr.baseAddress else { return }
 
-                if inputRingBuffer.read(base, count: frameSize) {
+                if inputRingBuffer.read(base, count: frameSize) == frameSize {
                     ncProcessor?.process(buffer: base, frameCount: frameSize)
                     _ = outputRingBuffer.write(base, count: frameSize)
                 }
@@ -160,7 +160,7 @@ class AudioEngine {
         onLevelUpdate?(level)
 
         // Write to input ring buffer for processing thread
-        if inputRingBuffer.write(inputData, count: frameCount) {
+        if inputRingBuffer.write(inputData, count: frameCount) == frameCount {
             processingLock.lock()
             processingLock.signal()
             processingLock.unlock()
@@ -174,7 +174,8 @@ class AudioEngine {
 
         guard let outputData = outputBuffer.floatChannelData?[0] else { return }
 
-        if outputRingBuffer.read(outputData, count: frameCount) {
+        if outputRingBuffer.availableToRead >= frameCount,
+           outputRingBuffer.read(outputData, count: frameCount) == frameCount {
             playerNode.scheduleBuffer(outputBuffer, completionHandler: nil)
         } else {
             // Not enough processed audio yet, output silence or passthrough

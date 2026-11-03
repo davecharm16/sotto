@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		081F5D13FB2B76658A274175 /* RingBufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B118273D4885E0A5B8C3EF /* RingBufferTests.swift */; };
 		0FDED68A18D28B2138D529FA /* enc.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 63684B8783374F046167FD87 /* enc.onnx */; };
 		11455AAC15ED76A64B3EA530 /* erb_dec.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 19587550198656ED5774BFF9 /* erb_dec.onnx */; };
 		162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */; };
@@ -15,15 +16,22 @@
 		3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */; };
 		3BAE91EE86F7C0C917BDB92C /* AudioDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E88C591F90C5A5E884FB75 /* AudioDevice.swift */; };
 		3E2C2FFC65CB6B7AC729C749 /* config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7CE6D1212721F5D6C9CD8ACD /* config.ini */; };
+		3EB9549458C41E31B9003015 /* DriftControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F325530E3019B0F53D3481C /* DriftControl.swift */; };
 		45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */; };
 		4B19D303D244BABED03983DF /* AudioLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */; };
 		565D32FAF1F407F86AD353AC /* SottoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7E813E0164D2C6C62956A7 /* SottoTests.swift */; };
 		5FDF29A85ED0F071604FA965 /* NCProcessorSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */; };
 		6EB4D6B40005F4F290F2EA38 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC96F56B7119C9C705911EF /* AppDelegate.swift */; };
 		73AA6C4FF3D8657D83BC6641 /* NCProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */; };
+		74F088699187EF83AED49CDD /* PipelineCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE54D17937FA4756A18641B5 /* PipelineCore.swift */; };
+		7CF9D01D4D08508054DA06BF /* PipelineCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE54D17937FA4756A18641B5 /* PipelineCore.swift */; };
 		814A321F8CABF94168522D57 /* SottoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */; };
 		8515394BB3F9504FC74BB4A9 /* AudioEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A63B057343FB5A6F3463D2D /* AudioEngine.swift */; };
 		9A02650A5C74F5691FC4D63C /* df_dec.onnx in Resources */ = {isa = PBXBuildFile; fileRef = 3D8FC91847F16550A00797BE /* df_dec.onnx */; };
+		9A56458A18174BE883AD06C4 /* DriftControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B576A77C2CD44635770A543 /* DriftControlTests.swift */; };
+		9B94210855DC3EBA00274C41 /* PipelineCoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */; };
+		BDF3B3EC1B72F072CF26FEBD /* TestSignals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */; };
+		C2FD4EBCF11BE40FB3ADDB04 /* DriftControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F325530E3019B0F53D3481C /* DriftControl.swift */; };
 		CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */; };
 		D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17641C3B03728027208486E5 /* AudioManager.swift */; };
 		E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E03AE1021C1145073976824 /* SottoMenuView.swift */; };
@@ -43,8 +51,10 @@
 
 /* Begin PBXFileReference section */
 		050B82091B1A6DF8AA687FD7 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		0F325530E3019B0F53D3481C /* DriftControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftControl.swift; sourceTree = "<group>"; };
 		17641C3B03728027208486E5 /* AudioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioManager.swift; sourceTree = "<group>"; };
 		19587550198656ED5774BFF9 /* erb_dec.onnx */ = {isa = PBXFileReference; path = erb_dec.onnx; sourceTree = "<group>"; };
+		1B576A77C2CD44635770A543 /* DriftControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriftControlTests.swift; sourceTree = "<group>"; };
 		2A94A254F9B50269EE1EAB8A /* Sotto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sotto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AE106A0C8D9B91FD6D29AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3A63B057343FB5A6F3463D2D /* AudioEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngine.swift; sourceTree = "<group>"; };
@@ -55,6 +65,7 @@
 		4BC96F56B7119C9C705911EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EB42E79AB0048E696FFE5DE /* AudioLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioLevelView.swift; sourceTree = "<group>"; };
 		5D7E813E0164D2C6C62956A7 /* SottoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoTests.swift; sourceTree = "<group>"; };
+		5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSignals.swift; sourceTree = "<group>"; };
 		63684B8783374F046167FD87 /* enc.onnx */ = {isa = PBXFileReference; path = enc.onnx; sourceTree = "<group>"; };
 		7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBuffer.swift; sourceTree = "<group>"; };
 		78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCProcessor.swift; sourceTree = "<group>"; };
@@ -62,10 +73,13 @@
 		7CE6D1212721F5D6C9CD8ACD /* config.ini */ = {isa = PBXFileReference; path = config.ini; sourceTree = "<group>"; };
 		7E03AE1021C1145073976824 /* SottoMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoMenuView.swift; sourceTree = "<group>"; };
 		93ACDB34463DDACC51075634 /* GlobalHotkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkey.swift; sourceTree = "<group>"; };
+		AE54D17937FA4756A18641B5 /* PipelineCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineCore.swift; sourceTree = "<group>"; };
 		AEA9648D29EB3F5FF0F8D077 /* SottoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SottoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1B25E6714CF4F0556E5527F /* SottoCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SottoCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C53ACB44A361763F4C050754 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C9B118273D4885E0A5B8C3EF /* RingBufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingBufferTests.swift; sourceTree = "<group>"; };
 		CB353666F0C36BD193807424 /* Sotto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sotto.entitlements; sourceTree = "<group>"; };
+		E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineCoreTests.swift; sourceTree = "<group>"; };
 		E3D46D2F57F9B2A8F0B0168B /* SottoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SottoApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +97,11 @@
 		1D81146000240E2550C1C5F1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				1B576A77C2CD44635770A543 /* DriftControlTests.swift */,
 				4438E788C21D08E2A38B395D /* NCProcessorSmokeTests.swift */,
+				E3C0BA0272D48E56D5938466 /* PipelineCoreTests.swift */,
+				C9B118273D4885E0A5B8C3EF /* RingBufferTests.swift */,
+				5F51535376F9EEFAD8BDAAF4 /* TestSignals.swift */,
 			);
 			name = Core;
 			path = Tests/Core;
@@ -103,7 +121,9 @@
 				3A63B057343FB5A6F3463D2D /* AudioEngine.swift */,
 				17641C3B03728027208486E5 /* AudioManager.swift */,
 				7B6890292CB2D53728E4BA62 /* DeviceMonitor.swift */,
+				0F325530E3019B0F53D3481C /* DriftControl.swift */,
 				78355AF1DC2416C20C6E3E21 /* NCProcessor.swift */,
+				AE54D17937FA4756A18641B5 /* PipelineCore.swift */,
 				7157F11B7FCE8CEEE499AD15 /* RingBuffer.swift */,
 			);
 			path = Audio;
@@ -353,9 +373,11 @@
 				D86FD9AAB0CAFC2375660139 /* AudioManager.swift in Sources */,
 				3A64A57459F5027B340A2040 /* DeviceMonitor.swift in Sources */,
 				F75B925CAB9C346C9CCA246D /* DevicePickerView.swift in Sources */,
+				3EB9549458C41E31B9003015 /* DriftControl.swift in Sources */,
 				351ACDC1C64AB266CC6D7777 /* GlobalHotkey.swift in Sources */,
 				CDBCC9772B4F8AC826E09F5D /* NCProcessor.swift in Sources */,
 				45770048E4C71AFCA0EF66A4 /* OnboardingView.swift in Sources */,
+				7CF9D01D4D08508054DA06BF /* PipelineCore.swift in Sources */,
 				282F117030F4C923CDF3EFB4 /* RingBuffer.swift in Sources */,
 				814A321F8CABF94168522D57 /* SottoApp.swift in Sources */,
 				E8B25AE69DE0ECAFC10921F8 /* SottoMenuView.swift in Sources */,
@@ -366,9 +388,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2FD4EBCF11BE40FB3ADDB04 /* DriftControl.swift in Sources */,
+				9A56458A18174BE883AD06C4 /* DriftControlTests.swift in Sources */,
 				73AA6C4FF3D8657D83BC6641 /* NCProcessor.swift in Sources */,
 				5FDF29A85ED0F071604FA965 /* NCProcessorSmokeTests.swift in Sources */,
+				74F088699187EF83AED49CDD /* PipelineCore.swift in Sources */,
+				9B94210855DC3EBA00274C41 /* PipelineCoreTests.swift in Sources */,
 				162C68DCC825977D48C025A3 /* RingBuffer.swift in Sources */,
+				081F5D13FB2B76658A274175 /* RingBufferTests.swift in Sources */,
+				BDF3B3EC1B72F072CF26FEBD /* TestSignals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

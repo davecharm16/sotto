@@ -2,6 +2,7 @@
 #define DeepFilter_Bridging_Header_h
 
 #include <stdint.h>
+#include "Audio/SottoAtomics.h"
 
 // DeepFilterNet3 noise cancellation (DeepFilter/, libdeepfilter.a). Hand-written: keep in sync with the
 // #[no_mangle] exports in DeepFilter/src/lib.rs.
