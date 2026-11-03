@@ -15,8 +15,8 @@ Local real-time noise cancellation desktop app for macOS using DeepFilterNet3.
   `0994ee6` then added thread safety: ring-buffer handoff, a processing thread and an `NCProcessor` lock.
 - **The NC engine is proven offline (Phase 1, 2026-10-04).** `DeepFilter/` wraps upstream libDF `DfTract`, and 7
   `cargo test` acceptance tests pass: noise is cut by −24 dB (pink) and −44 dB (white), SI-SDR improves by +8 to
-  +14 dB, latency is 1440 samples. ⚠ It has **not been heard end to end**: the mic isn't captured until Phase 2
-  (overview smell 13).
+  +14 dB, latency is 1440 samples. Phase 2–4 landed (2026-11-04) and the pipeline measured −48 dB on speaker pink noise through the real mic → BlackHole
+  path. ⚠ Still **not heard in a real call app**, and the 60-minute drift run is pending.
 - **Specs:** the PRD is `_bmad-output/planning-artifacts/prd.md`. The planned architecture is
   `_bmad-output/planning-artifacts/architecture.md`. Epics and stories (E1–E6) are in
   `_bmad-output/implementation-artifacts/epics-and-stories.md`. Decisions are in `ADR-Sotto.md` (the PRD supersedes

@@ -102,7 +102,7 @@ are no Rust tests, no linter and no CI.
 12. ◐ *The signing part is fixed in Phase 1: ADR-0006 amended, builds signed. ADR-0004 vs. the PRD is still open.* **Docs disagree with each other.** ADR-0004 phases Apple Voice Processing first. The PRD supersedes that with
     DeepFilterNet3 first, and the code uses no Voice Processing and no AEC. ADR-0006 says "no signing", but
     `project.yml` sets `CODE_SIGN_STYLE: Automatic` + hardened runtime.
-13. **The mic is not being captured (added and confirmed 2026-10-03; see [0001](0001-rearchitecture-assessment.md)
+13. ✅ *Fixed 2026-11-04 by the two-engine pipeline; mic capture proven on hardware.* **The mic was not being captured (added and confirmed 2026-10-03; see [0001](0001-rearchitecture-assessment.md)
     §2).** On macOS, `engine.inputNode.audioUnit` and
     `engine.outputNode.audioUnit` are the **same** AUHAL unit. A compiled probe on this Mac returned `true`, which
     matches [Apple forums thread 683348](https://developer.apple.com/forums/thread/683348).
